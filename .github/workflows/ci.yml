@@ -23,14 +23,17 @@ jobs:
         with:
           flutter-version: '3.0.0'
 
-      # 3) get dependencies
+      # 3) get dependencies in the project root
       - name: Pub get
         run: flutter pub get
+        working-directory: ${{ github.workspace }}
 
-      # 4) run the analyzer
+      # 4) run the analyzer in the project root
       - name: Analyze
         run: flutter analyze
+        working-directory: ${{ github.workspace }}
 
-      # 5) run your tests
+      # 5) run your tests in the project root
       - name: Run tests
         run: flutter test
+        working-directory: ${{ github.workspace }}
