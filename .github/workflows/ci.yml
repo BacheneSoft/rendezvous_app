@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) fetch your code
+      - uses: actions/checkout@v2
+
+      # 2) install Flutter
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.0.0'
+
+      # 3) get dependencies
+      - name: Pub get
+        run: flutter pub get
+
+      # 4) run the analyzer
+      - name: Analyze
+        run: flutter analyze
+
+      # 5) run your tests
+      - name: Run tests
+        run: flutter test
